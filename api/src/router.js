@@ -4,17 +4,29 @@ const router = new Router();
 
 
 const filename = (req, file, callback) => callback(null, file.originalname);
-const fileFilter = (req, file, callback)=>{
-    if(file.mimetype !== 'image/png'){
-        req.fileValidationError = "Wrong file type";
-        callback(null, false, new Error( "wrong file type"));
+// const fileFilter = (req, file, callback)=>{
+//     if(file.mimetype !== 'image/png'){
+//         req.fileValidationError = "Wrong file type";
+//         callback(null, false, new Error( "wrong file type"));
+//     }
+//     else{
+//         callback(null, true);
+//     }
+// }
+const fileFilter = (req, file, callback) => {
+    if ( file.mimetype !== 'image/png' ) {
+      req.fileValidationError = 'Wrong file type';
+      callback(null, false, new Error('Wrong file type'));
+    } else {
+      callback(null, true);
     }
-    else{
-        callback(null, true);
+  };
+const storage = multer.diskStorage(
+    {
+        destination:"api/uploads/", 
+        filename
     }
-}
-
-const storage = multer.diskStorage({destination:"api/uploads", filename})
+)
 //const upload = multer({limits: {filesize: 10000},filefilter, storage});
 const upload = multer({
     limits: {filesize: 10000},
