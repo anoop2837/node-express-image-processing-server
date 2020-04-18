@@ -9,10 +9,10 @@ const app = express();
 const pathToIndex = path.join(__dirname, '../client/index.html');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use (express.static(path.resolve(__dirname, 'uploads')));
 
 app.use('/', router);
 
-app.use (express.static(path.resolve(__dirname, 'uploads')));
 
 app.use('/*', (req, res) => {
   res.sendFile(pathToIndex);
