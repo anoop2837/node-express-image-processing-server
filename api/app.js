@@ -14,8 +14,8 @@ app.use (express.static(path.resolve(__dirname, 'uploads')));
 app.use('/', router);
 
 
-app.use('/*', (req, res) => {
-  res.sendFile(pathToIndex);
-});
+// app.use('/*', (req, res) => {
+//   res.sendFile(pathToIndex);
+// });
 
 module.exports = app;
