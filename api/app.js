@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', router);
 
-app.use(express.static(path.resolve(__dirname, 'uploads')));
+app.use (express.static(path.resolve(__dirname, 'uploads')));
 
 app.use('/*', (req, res) => {
   res.sendFile(pathToIndex);
