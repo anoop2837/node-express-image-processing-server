@@ -1,6 +1,7 @@
 const Router = require('express').Router;
 const multer = require("multer");
 const router = new Router();
+const path = require("path");
 
 
 const filename = (req, file, callback) => callback(null, file.originalname);
@@ -13,6 +14,9 @@ const filename = (req, file, callback) => callback(null, file.originalname);
 //         callback(null, true);
 //     }
 // }
+
+const photoPath = path.resolve(__dirname, '../../client/photo-viewer.html');
+
 const fileFilter = (req, file, callback) => {
     if ( file.mimetype !== 'image/png' ) {
       req.fileValidationError = 'Wrong file type';
@@ -41,5 +45,10 @@ router.post('/upload', upload.single('photo'),(req, res)=>{
 
         return res.status(201).json({success:true});
     }
+})
+
+
+router.get('/photo-viewer', (req, res)=>{
+  res.sendFile(photoPath);
 })
 module.exports = router;
